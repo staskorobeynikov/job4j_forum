@@ -13,6 +13,8 @@ public class Post {
 
     private Calendar created;
 
+    private Topic topic;
+
     public static Post of(String name) {
         Post post = new Post();
         post.name = name;
