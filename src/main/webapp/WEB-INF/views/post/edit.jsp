@@ -25,7 +25,32 @@
                 Форма для редактирования поста в обсуждении
             </div>
             <div class="card-body">
-
+                <form action="<c:url value='/save'/>" method='POST'>
+                    <div class="form-group row">
+                        <label class="col-form-label col-sm-3" for="name" style="font-weight: 900">Имя поста</label>
+                        <div class="col-sm-5">
+                            <input type='text' class="form-control" name='name' id="name" value="${post.name}">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-form-label col-sm-3" for="desc" style="font-weight: 900">Текст поста</label>
+                        <div class="col-sm-5">
+                            <input type='text' class="form-control" name='desc' id="desc" value="${post.desc}">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <input type="hidden" name="id" value="${post.id}">
+                    </div>
+                    <div class="form-group row">
+                        <input type="hidden" name="topic_id" value="${post.topic.id}">
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-form-label col-sm-3" style="font-weight: 900"></label>
+                        <div class="col-sm-5">
+                            <button type="submit" class="btn btn-dark">Изменить</button>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

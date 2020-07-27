@@ -20,6 +20,23 @@
 <body>
 <div class="container pt-1">
     <div class="row">
+        <ul class="nav">
+            <li class="nav-item" style="font-weight: bold">
+                <a class="nav-link" href="<c:url value="/topic/create"/>">Добавить тему</a>
+            </li>
+        </ul>
+        <ul class="nav">
+            <li class="nav-item" style="font-weight: bold">
+                <a class="nav-link" href="<c:url value="/logout"/>"><c:out value="${user.username}"/> | Выйти из системы</a>
+            </li>
+        </ul>
+        <ul class="nav">
+            <li class="nav-item" style="font-weight: bold">
+                <a class="nav-link" href="<c:url value="/login"/>">Войти</a>
+            </li>
+        </ul>
+    </div>
+    <div class="row">
         <div class="card" style="width: 100%">
             <div class="card-header" style="font-weight: bold; font-size: larger">
                 Форум job4j
@@ -29,13 +46,21 @@
                     <thead>
                     <tr>
                         <th scope="col">Название</th>
+                        <th scope="col">Автор</th>
+                        <th scope="col">Количество сообщений</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <c:forEach items="${posts}" var="post">
+                    <c:forEach items="${topics}" var="topic">
                         <tr>
                             <td>
-                                <c:out value="${post.name}"/>
+                                <a href="${pageContext.request.contextPath}/post?id=${topic.id}">${topic.name}</a>
+                            </td>
+                            <td>
+                                <c:out value="${topic.author.username}"/>
+                            </td>
+                            <td>
+                                <c:out value="${topic.posts.size()}"/>
                             </td>
                         </tr>
                     </c:forEach>

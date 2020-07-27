@@ -15,9 +15,12 @@ public class Post {
 
     private Topic topic;
 
-    public static Post of(String name) {
+    public static Post of(int id, String name, String desc) {
         Post post = new Post();
+        post.id = id;
         post.name = name;
+        post.desc = desc;
+        post.created = Calendar.getInstance();
         return post;
     }
 
@@ -51,6 +54,14 @@ public class Post {
 
     public void setCreated(Calendar created) {
         this.created = created;
+    }
+
+    public Topic getTopic() {
+        return topic;
+    }
+
+    public void setTopic(Topic topic) {
+        this.topic = topic;
     }
 
     @Override

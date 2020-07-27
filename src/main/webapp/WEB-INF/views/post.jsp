@@ -19,7 +19,46 @@
 </head>
 <body>
 <div class="container pt-1">
-
+    <div class="row">
+        <ul class="nav">
+            <li class="nav-item" style="font-weight: bold">
+                <a class="nav-link" href="<c:url value="/create?id=${topic.id}"/>">Добавить сообщение</a>
+            </li>
+        </ul>
+    </div>
+    <div class="row">
+        <div class="card" style="width: 100%">
+            <div class="card-header" style="font-weight: bold; font-size: larger">
+                <a href="${pageContext.request.contextPath}/topic/update?id=${topic.id}">${topic.name} | Редактировать</a>
+            </div>
+            <div class="card-body">
+                <table class="table table-striped, table-bordered">
+                    <thead>
+                    <tr>
+                        <th scope="col">Название</th>
+                        <th scope="col">Текст сообщения</th>
+                        <th scope="col">Дата создания</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <c:forEach items="${topic.posts}" var="post">
+                        <tr>
+                            <td>
+                                <a href="${pageContext.request.contextPath}/update?id=${post.id}">${post.name}</a>
+                            </td>
+                            <td>
+                                ${post.desc}
+                            </td>
+                            <td>
+                                ${post.created.time}
+                            </td>
+                        </tr>
+                    </c:forEach>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 </div>
 </body>
 </html>

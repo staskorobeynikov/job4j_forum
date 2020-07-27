@@ -25,7 +25,29 @@
                 Форма для создания поста обсуждения
             </div>
             <div class="card-body">
-
+                <form action="<c:url value='/save'/>" method='POST'>
+                    <div class="form-group row">
+                        <label class="col-form-label col-sm-3" for="name" style="font-weight: 900">Имя обсуждения</label>
+                        <div class="col-sm-5">
+                            <input type='text' class="form-control" name='name' id="name">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-form-label col-sm-3" for="desc" style="font-weight: 900">Текст обсуждения</label>
+                        <div class="col-sm-5">
+                            <input type='text' class="form-control" name='desc' id="desc">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <input type="hidden" name="topic_id" value="${topic_id}">
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-form-label col-sm-3" style="font-weight: 900"></label>
+                        <div class="col-sm-5">
+                            <button type="submit" class="btn btn-dark">Добавить</button>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

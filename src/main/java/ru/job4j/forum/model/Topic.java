@@ -13,7 +13,7 @@ public class Topic {
 
     private List<Post> posts = new ArrayList<>();
 
-    public Topic of(String name) {
+    public static Topic of(String name) {
         Topic topic = new Topic();
         topic.name = name;
         return topic;
