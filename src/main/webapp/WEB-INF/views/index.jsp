@@ -47,6 +47,7 @@
                     <tr>
                         <th scope="col">Название</th>
                         <th scope="col">Автор</th>
+                        <th scope="col">Статус</th>
                         <th scope="col">Количество сообщений</th>
                     </tr>
                     </thead>
@@ -58,6 +59,9 @@
                             </td>
                             <td>
                                 <c:out value="${topic.author.username}"/>
+                            </td>
+                            <td>
+                                <c:out value="${topic.status.text}"/>
                             </td>
                             <td>
                                 <c:out value="${topic.posts.size()}"/>

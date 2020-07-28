@@ -33,9 +33,9 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-form-label col-sm-3" for="desc" style="font-weight: 900">Текст обсуждения</label>
+                        <label class="col-form-label col-sm-3" for="description" style="font-weight: 900">Текст обсуждения</label>
                         <div class="col-sm-5">
-                            <input type='text' class="form-control" name='desc' id="desc">
+                            <input type='text' class="form-control" name='description' id="description">
                         </div>
                     </div>
                     <div class="form-group row">

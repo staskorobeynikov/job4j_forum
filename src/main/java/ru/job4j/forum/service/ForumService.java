@@ -1,75 +1,67 @@
 package ru.job4j.forum.service;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.job4j.forum.model.Post;
 import ru.job4j.forum.model.Topic;
 import ru.job4j.forum.model.User;
+import ru.job4j.forum.repository.PostRepository;
+import ru.job4j.forum.repository.TopicRepository;
+import ru.job4j.forum.repository.UserRepository;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.concurrent.atomic.AtomicInteger;
+import java.util.Optional;
 
 @Service
 public class ForumService {
 
-    private final Map<Integer, Post> posts = new HashMap<>();
+    private final TopicRepository tRep;
 
-    private final Map<Integer, Topic> topics = new HashMap<>();
+    private final PostRepository pRep;
 
-    private final List<User> users = new ArrayList<>();
+    private final UserRepository uRep;
 
-    private static final AtomicInteger TOPIC_ID = new AtomicInteger(2);
-
-    private static final AtomicInteger POST_ID = new AtomicInteger(3);
-
-    public ForumService() {
-        Post one = Post.of(1, "Лада", "Продам машину ладу 01.");
-        Post two = Post.of(2, "Тойота", "Продам машину тойоту.");
-        posts.put(one.getId(), one);
-        posts.put(two.getId(), two);
-        User user = User.of("root", "root");
-        users.add(user);
-        Topic topic = Topic.of("Продажа автомобилей");
-        topic.setId(1);
-        topic.setPosts(new ArrayList<>(posts.values()));
-        topic.setAuthor(user);
-        topics.put(topic.getId(), topic);
-        one.setTopic(topic);
-        two.setTopic(topic);
-    }
-
-    public List<Post> getAll() {
-        return new ArrayList<>(posts.values());
+    public ForumService(TopicRepository tRep,
+                        PostRepository pRep,
+                        UserRepository uRep) {
+        this.tRep = tRep;
+        this.pRep = pRep;
+        this.uRep = uRep;
     }
 
     public List<Topic> getAllTopics() {
-        return new ArrayList<>(topics.values());
+        return tRep.findAllTopics();
     }
 
     public Topic findById(int id) {
-        return topics.get(id);
+        return tRep.findTopic_PostsById(id);
     }
 
+    @Transactional
     public void addPost(int id, Post post) {
-        Topic byId = findById(id);
-        post.setTopic(byId);
         if (post.getId() == 0) {
-            post.setId(POST_ID.getAndIncrement());
+            post.setTopic(tRep.findById(id).get());
+            pRep.save(post);
+        } else {
+            pRep.updatePost(post.getName(), post.getDescription(), post.getId());
         }
-        posts.put(post.getId(), post);
     }
 
+    @Transactional
     public void addTopic(Topic topic) {
-        topic.setAuthor(users.get(0));
         if (topic.getId() == 0) {
-            topic.setId(TOPIC_ID.getAndIncrement());
+            tRep.save(topic);
+        } else {
+            tRep.updateTopic(topic.getName(), topic.getStatus(), topic.getId());
         }
-        topics.put(topic.getId(), topic);
     }
 
     public Post postFindById(int id) {
-        return posts.get(id);
+        return pRep.findPost_TopicById(id);
+    }
+
+    public User uFindById(int id) {
+        Optional<User> user = uRep.findById(id);
+        return user.orElseGet(User::new);
     }
 }

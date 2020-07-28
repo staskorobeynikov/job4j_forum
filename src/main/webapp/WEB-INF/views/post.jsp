@@ -47,7 +47,7 @@
                                 <a href="${pageContext.request.contextPath}/update?id=${post.id}">${post.name}</a>
                             </td>
                             <td>
-                                ${post.desc}
+                                ${post.description}
                             </td>
                             <td>
                                 ${post.created.time}

@@ -33,6 +33,16 @@
                         </div>
                     </div>
                     <div class="form-group row">
+                        <label class="col-form-label col-sm-3" for="status" style="font-weight: 900">Статус обсуждения</label>
+                        <div class="col-sm-5">
+                            <select class="form-control" name="status" id="status" >
+                                <c:forEach var="st" items="${status}">
+                                    <option value="${st}">${st.text}</option>
+                                </c:forEach>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
                         <input type="hidden" name="id" value="${topic.id}">
                     </div>
                     <div class="form-group row">
