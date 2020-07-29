@@ -43,7 +43,7 @@
             <div class="card-body">
                 <form name='login' action="<c:url value='/login'/>" method='POST'>
                     <div class="form-group">
-                        <label for="username" style="font-weight: bold">UserName:</label>
+                        <label for="username" style="font-weight: bold">Username:</label>
                         <input type="text" class="form-control" name="username" id="username" placeholder="Введите ваш логин...">
                     </div>
                     <div class="form-group">

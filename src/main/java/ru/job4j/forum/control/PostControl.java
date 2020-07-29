@@ -1,5 +1,6 @@
 package ru.job4j.forum.control;
 
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -40,7 +41,14 @@ public class PostControl {
                 post.getName(),
                 post.getDescription()
         );
-        post.setCreator(fService.uFindById(1));
+        post.setCreator(
+                fService.uFindByUsername(
+                        SecurityContextHolder
+                                .getContext()
+                                .getAuthentication()
+                                .getName()
+                )
+        );
         fService.addPost(Integer.parseInt(topicId), post1);
         return "redirect:/";
     }

@@ -10,7 +10,6 @@ import ru.job4j.forum.repository.TopicRepository;
 import ru.job4j.forum.repository.UserRepository;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class ForumService {
@@ -60,8 +59,7 @@ public class ForumService {
         return pRep.findPost_TopicById(id);
     }
 
-    public User uFindById(int id) {
-        Optional<User> user = uRep.findById(id);
-        return user.orElseGet(User::new);
+    public User uFindByUsername(String username) {
+        return uRep.findByUsername(username);
     }
 }

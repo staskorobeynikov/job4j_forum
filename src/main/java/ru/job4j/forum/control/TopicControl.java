@@ -1,5 +1,6 @@
 package ru.job4j.forum.control;
 
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -37,7 +38,14 @@ public class TopicControl {
         if (topic.getStatus() != null && topic.getStatus().equals(Status.CLOSED)) {
             nTopic.setStatus(topic.getStatus());
         }
-        nTopic.setAuthor(fService.uFindById(1));
+        nTopic.setAuthor(
+                fService.uFindByUsername(
+                        SecurityContextHolder
+                                .getContext()
+                                .getAuthentication()
+                                .getName()
+                )
+        );
         nTopic.setId(topic.getId());
         fService.addTopic(nTopic);
         return "redirect:/";
