@@ -29,7 +29,7 @@
     <div class="row">
         <div class="card" style="width: 100%">
             <div class="card-header" style="font-weight: bold; font-size: larger">
-                <a href="${pageContext.request.contextPath}/topic/update?id=${topic.id}">${topic.name} | Редактировать</a>
+                ${topic.name} | <a href="${pageContext.request.contextPath}/topic/update?id=${topic.id}">Редактировать</a>
             </div>
             <div class="card-body">
                 <table class="table table-striped, table-bordered">
