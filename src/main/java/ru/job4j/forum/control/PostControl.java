@@ -36,12 +36,12 @@ public class PostControl {
     @PostMapping("/save")
     public String savePost(@ModelAttribute Post post, HttpServletRequest req) {
         String topicId = req.getParameter("topic_id");
-        Post post1 = Post.of(
+        Post addPost = Post.of(
                 post.getId(),
                 post.getName(),
                 post.getDescription()
         );
-        post.setCreator(
+        addPost.setCreator(
                 fService.uFindByUsername(
                         SecurityContextHolder
                                 .getContext()
@@ -49,7 +49,7 @@ public class PostControl {
                                 .getName()
                 )
         );
-        fService.addPost(Integer.parseInt(topicId), post1);
+        fService.addPost(Integer.parseInt(topicId), addPost);
         return "redirect:/";
     }
 
