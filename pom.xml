@@ -15,7 +15,7 @@
     <artifactId>job4j_forum</artifactId>
     <version>3.0</version>
 
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
 
     <properties>
         <maven.compiler.source>13</maven.compiler.source>
