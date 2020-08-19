@@ -22,14 +22,14 @@
     <div class="row">
         <ul class="nav">
             <li class="nav-item" style="font-weight: bold">
-                <a class="nav-link" href="<c:url value="/create?id=${topic.id}"/>">Добавить сообщение</a>
+                <a class="nav-link" href="<c:url value="/posts/create?id=${topic.id}"/>">Добавить сообщение</a>
             </li>
         </ul>
     </div>
     <div class="row">
         <div class="card" style="width: 100%">
             <div class="card-header" style="font-weight: bold; font-size: larger">
-                ${topic.name} | <a href="${pageContext.request.contextPath}/topic/update?id=${topic.id}">Редактировать</a>
+                ${topic.name} | <a href="${pageContext.request.contextPath}/topics/update?id=${topic.id}">Редактировать</a>
             </div>
             <div class="card-body">
                 <table class="table table-striped, table-bordered">
@@ -44,7 +44,7 @@
                     <c:forEach items="${topic.posts}" var="post">
                         <tr>
                             <td>
-                                <a href="${pageContext.request.contextPath}/update?id=${post.id}">${post.name}</a>
+                                <a href="${pageContext.request.contextPath}/posts/update?id=${post.id}">${post.name}</a>
                             </td>
                             <td>
                                 ${post.description}

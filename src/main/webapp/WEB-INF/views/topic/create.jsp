@@ -25,7 +25,7 @@
                 Форма для создания темы обсуждения
             </div>
             <div class="card-body">
-                <form action="<c:url value='/topic/save'/>" method='POST'>
+                <form action="<c:url value='/topics/save'/>" method='POST'>
                     <div class="form-group row">
                         <label class="col-form-label col-sm-3" for="name" style="font-weight: 900">Имя обсуждения</label>
                         <div class="col-sm-5">

@@ -36,7 +36,7 @@ class TopicControlTest {
     @Test
     @WithMockUser
     public void shouldReturnTopicCreateView() throws Exception {
-        this.mockMvc.perform(get("/topic/create"))
+        this.mockMvc.perform(get("/topics/create"))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(view().name("topic/create"));
@@ -45,7 +45,7 @@ class TopicControlTest {
     @Test
     @WithMockUser
     public void shouldReturnTopicEditView() throws Exception {
-        this.mockMvc.perform(get("/topic/update?id=1"))
+        this.mockMvc.perform(get("/topics/update?id=1"))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(view().name("topic/edit"));
@@ -57,7 +57,7 @@ class TopicControlTest {
         MultiValueMap<String, String> map = new LinkedMultiValueMap<>();
         map.add("name", "Продажа автомобилей");
         map.add("status", "CLOSED");
-        this.mockMvc.perform(post("/topic/save").params(map))
+        this.mockMvc.perform(post("/topics/save").params(map))
                 .andDo(print())
                 .andExpect(status().is3xxRedirection())
                 .andExpect(redirectedUrl("/"));

@@ -35,7 +35,7 @@ class PostControlTest {
     @Test
     @WithMockUser
     public void shouldReturnPostCreateView() throws Exception {
-        this.mockMvc.perform(get("/create?id=1"))
+        this.mockMvc.perform(get("/posts/create?id=1"))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(view().name("post/create"));
@@ -44,7 +44,7 @@ class PostControlTest {
     @Test
     @WithMockUser
     public void shouldReturnPostEditView() throws Exception {
-        this.mockMvc.perform(get("/update?id=1"))
+        this.mockMvc.perform(get("/posts/update?id=1"))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(view().name("post/edit"));
@@ -53,10 +53,10 @@ class PostControlTest {
     @Test
     @WithMockUser
     public void shouldReturnPostView() throws Exception {
-        this.mockMvc.perform(get("/post?id=1"))
+        this.mockMvc.perform(get("/posts/post?id=1"))
                 .andDo(print())
                 .andExpect(status().isOk())
-                .andExpect(view().name("post"));
+                .andExpect(view().name("post/post"));
     }
 
     @Test
@@ -67,7 +67,7 @@ class PostControlTest {
         map.add("name", "Toyota");
         map.add("description", "Продам автомобиль Toyota");
         map.add("topic_id", "1");
-        this.mockMvc.perform(post("/save")
+        this.mockMvc.perform(post("/posts/save")
                 .params(map))
                 .andDo(print())
                 .andExpect(status().is3xxRedirection())

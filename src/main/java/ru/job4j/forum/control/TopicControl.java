@@ -11,7 +11,7 @@ import ru.job4j.forum.service.ForumService;
 import java.util.Arrays;
 
 @Controller
-@RequestMapping("/topic")
+@RequestMapping("/topics")
 public class TopicControl {
 
     private final ForumService fService;
