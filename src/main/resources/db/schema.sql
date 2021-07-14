@@ -6,7 +6,7 @@ create table authorities(
 create table users(
     id serial primary key,
     password varchar(255),
-    username varchar(255),
+    username varchar(255) unique,
     enabled boolean,
     authority_id integer references authorities(id)
 );
