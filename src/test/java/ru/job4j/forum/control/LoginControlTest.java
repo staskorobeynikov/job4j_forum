@@ -20,8 +20,8 @@ class LoginControlTest {
 
     @Test
     @WithMockUser(username = "root", password = "root")
-    public void shouldRedirectLoginView() throws Exception {
-        this.mockMvc.perform(get("/logout"))
+    public void whenRedirectLoginJspWithLogoutRequest() throws Exception {
+        this.mockMvc.perform(get("/out"))
                 .andDo(print())
                 .andExpect(status().is3xxRedirection())
                 .andExpect(redirectedUrl("/login?logout=true"));
