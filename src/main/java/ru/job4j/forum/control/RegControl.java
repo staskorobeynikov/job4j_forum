@@ -6,10 +6,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import ru.job4j.forum.model.User;
 import ru.job4j.forum.repository.AuthorityRepository;
 import ru.job4j.forum.repository.UserRepository;
@@ -35,17 +32,11 @@ public class RegControl {
 
     @PostMapping("/reg")
     public String save(@ModelAttribute User user) {
-        boolean rsl = false;
         user.setEnabled(true);
         user.setPassword(encoder.encode(user.getPassword()));
         user.setAuthority(authorities.findByAuthority("ROLE_USER"));
-        try {
-            users.save(user);
-            rsl = true;
-        } catch (DataIntegrityViolationException dive) {
-            LOG.error("Нарушение уникальности поля username при регистрации пользователя.", dive);
-        }
-        return rsl ? "redirect:/login" : "redirect:/reg?error=true";
+        users.save(user);
+        return "redirect:/login";
     }
 
     @GetMapping("/reg")
@@ -59,5 +50,11 @@ public class RegControl {
         }
         model.addAttribute("errorMessage", errorMessage);
         return "reg";
+    }
+
+    @ExceptionHandler(value = {DataIntegrityViolationException.class})
+    public String exceptionHandler(Exception e) {
+        LOG.error("Нарушение уникальности поля username при регистрации пользователя.", e);
+        return "redirect:/reg?error=true";
     }
 }
